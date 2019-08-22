@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://dubbo.apache.org/schema/dubbo        http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <dubbo:application name="consumer-of-helloworld-app"  />
+
+    <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+    <dubbo:reference id="sayHelloService" interface="com.lonely.service.SayHelloService"/>
+
+    <!--zk注册中心地址-->
+    <dubbo:registry address="zookeeper://localhost:2181"/>
+
+    <!--
+        服务消费者 相对没有注册中心zk的时候配置差距
+            1. 删除url配置：url="dubbo://localhost:20880"
+            2. 添加zk注册中心配置
+    -->
+
+
+</beans>
